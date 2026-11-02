@@ -251,10 +251,12 @@ main h3 { margin: 32px 0 12px; }
 .split section + section { border-left: 1px solid var(--rule); }
 
 /* 표 */
-.ledger { width: 100%; border-collapse: collapse; }
+/* anywhere는 최소 폭을 없애 자동 열폭이 낱말 중간을 쪼갠다. 표에서는 넘칠 때만 끊는다 */
+.ledger { width: 100%; border-collapse: collapse; overflow-wrap: break-word; }
 .ledger th, .ledger td { padding: 10px 14px; border: 1px solid var(--rule); text-align: left; vertical-align: top; }
 .ledger thead th { background: var(--tint); color: var(--ink); font-size: 15px; font-weight: 700; white-space: nowrap; }
-.ledger tbody th { font-weight: 700; }
+.ledger tbody th { font-weight: 700; white-space: nowrap; }
+.ledger time { white-space: nowrap; }
 .ledger td a + a { margin-left: 12px; }
 .note { margin: 16px 0 0; }
 

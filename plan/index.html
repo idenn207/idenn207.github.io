@@ -31,7 +31,7 @@
       <a href="/#services">서비스</a>
       <a href="/#process">구축 과정</a>
       <a href="/#about">소개</a>
-      <a href="/plan/" aria-current="page">계획</a>
+      <a href="/plan/" aria-current="page">제작 계획</a>
       <a href="https://github.com/idenn207">GitHub</a>
     </nav>
   </header>
@@ -64,8 +64,8 @@
           <tbody>
             <tr><th scope="row">콘텐츠</th><td>서비스 3개를 개요, 목표, 사용 기술, 주요 기능, 코드, 역할, 결과의 7항목(총 21칸)으로 모두 작성, 그 밖의 프로젝트 6개 요약</td></tr>
             <tr><th scope="row">배포</th><td>전체 경로 직접 접속 정상, 깨진 링크와 콘솔 오류 0건</td></tr>
-            <tr><th scope="row">버전관리</th><td>작업을 브랜치와 PR로 관리, 의미 없는 커밋 메시지 0건, a.b.c 형식 버전 태그 사용</td></tr>
-            <tr><th scope="row">디자인 및 UX</th><td>390, 820, 1440px에서 가로 넘침 0건, 모든 페이지의 머리글과 간격 일관 유지</td></tr>
+            <tr><th scope="row">버전관리</th><td>작업을 브랜치와 PR로 관리하고, 발견된 버그는 issue로 관리, Major.Minor.Patch 형식 버전 태그 사용</td></tr>
+            <tr><th scope="row">디자인 및 UX</th><td>390, 820, 1440px에서 반응형 렌더링, 모든 페이지의 머리글과 간격 일관 유지</td></tr>
             <tr><th scope="row">검색 정보</th><td>전체 경로에 title, description, canonical, 이미지 alt 작성</td></tr>
           </tbody>
         </table>
@@ -73,16 +73,16 @@
 
       <section id="template">
         <h2>템플릿 선정</h2>
-        <p><strong>자체 개발 테마</strong>를 선택했습니다. 순수 HTML, CSS, JavaScript로 직접 개발하고, 구조는 홈 1개, 프로젝트 상세 3개, 계획 1개, 404 페이지입니다.</p>
-        <p>랜딩 구성은 rs-team.com의 프로세스 단계와 실적 소개, coupin.io의 문제에서 해결로 이어지는 흐름을 참고하되, 문구와 이미지는 직접 작성합니다.</p>
+        <p><strong>자체 개발 테마</strong>를 선택했습니다. 포트폴리오용 랜딩 페이지이기 때문에 React, API 등의 기능이 필요 없다고 판단해 순수 HTML, CSS, JavaScript로 개발합니다. 구조는 홈 1개, 프로젝트 상세 3개, 계획 1개, 404 페이지입니다.</p>
+        <p>랜딩 구성은 rs-team.com(회사 소개 페이지)의 프로세스 단계와 실적 소개, coupin.io(랜딩 디자인 시스템 참고)의 문제에서 해결로 이어지는 흐름을 참고하되, 문구와 이미지는 직접 작성합니다.</p>
         <figure class="shot">
-          <img src="/assets/img/plan-drawing.webp" width="1500" height="860" loading="lazy" alt="자체 개발 템플릿 레이아웃 드로잉. 홈은 머리글, 소개 한 문장과 대표 화면, 서비스 3개, 구축 과정 4단계, 짧은 소개와 그 밖의 프로젝트 6개, 하단 연락 구역 순서이고, 프로젝트 상세는 머리글, 서비스 이름과 상태, 왼쪽 목차, 오른쪽 7항목 순서다.">
-          <figcaption>계획수립 단계의 레이아웃 드로잉입니다.</figcaption>
+          <a href="/assets/img/plan-drawing.webp"><img src="/assets/img/plan-drawing.webp" width="1500" height="722" loading="lazy" alt="자체 개발 템플릿 레이아웃 드로잉. 홈은 머리글, 소개 한 문장과 대표 화면, 서비스 3개, 구축 과정 4단계, 짧은 소개와 그 밖의 프로젝트 6개, 하단 연락 구역 순서이고, 프로젝트 상세는 머리글, 서비스 이름과 상태, 왼쪽 목차, 오른쪽 7항목 순서다."></a>
+          <figcaption>계획수립 시트에 넣은 레이아웃 드로잉입니다.</figcaption>
         </figure>
-        <h3>선정 사유</h3>
+        <h3>선정 이유</h3>
         <ul>
-          <li>평가 대상이 서비스 소개이므로, 범용 블로그 테마보다 프로젝트를 앞세우는 랜딩 구조가 목적에 맞습니다.</li>
-          <li>교안의 index.html, css, js 구조와 같고 빌드 과정이 없어 main 브랜치 배포로 바로 공개할 수 있습니다.</li>
+          <li>평가 대상이 서비스 소개이므로, 범용 블로그 테마보다 프로젝트를 앞세우는 랜딩 구조가 포트폴리오 목적에 더 맞습니다.</li>
+          <li>index.html, css, js 구조로 빌드 과정이 없어 main 브랜치 배포로 바로 운영할 수 있습니다.</li>
           <li>GitHub Pages는 정적 호스팅이므로 서버 없이 동작하는 구성이 안정적입니다.</li>
           <li>직접 개발하므로 디자인과 페이지 구성을 사이트 전체에서 일관되게 유지할 수 있습니다.</li>
         </ul>
@@ -91,14 +91,14 @@
       <section id="timeline">
         <h2>타임라인</h2>
         <table class="ledger">
-          <thead><tr><th scope="col">주차</th><th scope="col">범위</th><th scope="col">목표</th><th scope="col">완료 기준</th><th scope="col">상태</th></tr></thead>
+          <thead><tr><th scope="col">주차</th><th scope="col">범위</th><th scope="col">목표</th><th scope="col">완료 기준</th></tr></thead>
           <tbody>
-            <tr><th scope="row">8주차</th><td data-label="범위">주제 확정, 드로잉, 계획수립 제출</td><td data-label="목표">계획 확정</td><td data-label="완료 기준">계획수립 시트 제출</td><td data-label="상태">시트 작성 완료</td></tr>
-            <tr><th scope="row">9~10주차</th><td data-label="범위">저장소 정리, 홈과 상세 골격 1차 배포</td><td data-label="목표">v0.1.0</td><td data-label="완료 기준">전체 경로 공개, 교수 및 학생 평가용 URL 등록</td><td data-label="상태">진행 중</td></tr>
-            <tr><th scope="row">11~12주차</th><td data-label="범위">서비스 3개 7항목, 코드, 화면 캡처 작성</td><td data-label="목표">v0.5.0</td><td data-label="완료 기준">21칸 완성, README 작성</td><td data-label="상태">진행 중</td></tr>
-            <tr><th scope="row">13주차</th><td data-label="범위">디자인 통일, 반응형, 검색 정보, 링크 점검</td><td data-label="목표">v0.9.0</td><td data-label="완료 기준">측정 기준 충족</td><td data-label="상태">예정</td></tr>
-            <tr><th scope="row">14주차</th><td data-label="범위">발표, 피드백 수집과 우선순위 정리, 수행 시트 제출</td><td data-label="목표">1차 평가 대응</td><td data-label="완료 기준">피드백 기록 완료</td><td data-label="상태">예정</td></tr>
-            <tr><th scope="row">15주차</th><td data-label="범위">피드백 반영, 자율채점, 최종 제출</td><td data-label="목표">v1.0.0</td><td data-label="완료 기준">최종결과 시트 제출</td><td data-label="상태">예정</td></tr>
+            <tr><th scope="row">8주차</th><td data-label="범위">주제 확정, 드로잉, 계획수립 제출</td><td data-label="목표">계획 확정</td><td data-label="완료 기준">계획수립 시트 제출</td></tr>
+            <tr><th scope="row">9~10주차</th><td data-label="범위">저장소 정리, 홈과 상세 골격 1차 배포</td><td data-label="목표">v0.1.0</td><td data-label="완료 기준">전체 경로 공개, 교수 및 학생 평가용 URL 등록</td></tr>
+            <tr><th scope="row">11~12주차</th><td data-label="범위">서비스 3개 7항목, 코드, 화면 캡처 작성</td><td data-label="목표">v0.5.0</td><td data-label="완료 기준">21칸 완성, README 작성</td></tr>
+            <tr><th scope="row">13주차</th><td data-label="범위">디자인 통일, 반응형, 검색 정보, 링크 점검</td><td data-label="목표">v0.9.0</td><td data-label="완료 기준">측정 기준 충족</td></tr>
+            <tr><th scope="row">14주차</th><td data-label="범위">발표, 피드백 수집과 우선순위 정리, 수행 시트 제출</td><td data-label="목표">1차 평가 대응</td><td data-label="완료 기준">피드백 기록 완료</td></tr>
+            <tr><th scope="row">15주차</th><td data-label="범위">피드백 반영, 자율채점, 최종 제출</td><td data-label="목표">v1.0.0</td><td data-label="완료 기준">최종결과 시트 제출</td></tr>
           </tbody>
         </table>
         <p class="note">매주 1회 이상 커밋해 GitHub 활동 기록을 유지합니다.</p>
@@ -109,7 +109,7 @@
         <table class="ledger">
           <thead><tr><th scope="col">버전</th><th scope="col">날짜</th><th scope="col">내용</th></tr></thead>
           <tbody>
-            <tr><th scope="row">0.1.0</th><td>2026-11-02</td><td>Code Editor 페이지를 <a href="https://github.com/idenn207/idenn207.github.io/tree/legacy-code-editor">legacy-code-editor 태그</a>로 보존하고 포트폴리오로 교체. 별도 아카이브 경로 대신 홈의 요약 표로 구성.</td></tr>
+            <tr><th scope="row">0.1.0</th><td data-label="날짜"><time datetime="2026-11-02">2026-11-02</time></td><td data-label="내용">Code Editor 페이지를 <a href="https://github.com/idenn207/idenn207.github.io/tree/legacy-code-editor">legacy-code-editor 태그</a>로 보존하고 포트폴리오로 교체. 별도 아카이브 경로 대신 홈의 요약 표로 구성.</td></tr>
           </tbody>
         </table>
       </section>
