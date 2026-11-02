@@ -225,6 +225,7 @@ main h3 { margin: 32px 0 12px; }
 .ledger thead th { background: var(--tint); color: var(--ink); font-size: 15px; font-weight: 700; white-space: nowrap; }
 .ledger tbody th { font-weight: 700; }
 .ledger td a + a { margin-left: 12px; }
+.note { margin: 16px 0 0; }
 
 /* 코드와 그림 */
 .code { margin: 24px 0 0; }
