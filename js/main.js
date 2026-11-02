@@ -8,6 +8,8 @@ const setMenu = (open) => {
 };
 
 menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+// 같은 페이지 안 절로 이동할 때 메뉴가 도착한 내용을 덮지 않게 닫는다
+nav.addEventListener('click', () => setMenu(false));
 document.addEventListener('click', (e) => {
   if (!e.target.closest('.site-head')) setMenu(false);
 });
