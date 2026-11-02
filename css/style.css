@@ -118,6 +118,7 @@ code { font: 0.92em var(--mono); }
   background: var(--paper);
 }
 .sheet.no-rail { grid-template-columns: minmax(0, 1fr); }
+.no-rail .case-head { border-bottom: 0; }
 .rail { background: var(--ink); }
 .toc { position: sticky; top: var(--head); }
 .toc ol { position: relative; margin: 0; padding: 0; list-style: none; }
@@ -278,7 +279,7 @@ main h3 { margin: 32px 0 12px; }
 .case-head p { margin: 8px 0 24px; font-size: 20px; line-height: 1.5; }
 .case-head .cta { margin-top: 16px; }
 
-.contact { padding: 72px max(248px, calc((100vw - 1440px) / 2 + 248px)); background: var(--ink-deep); color: #fff; }
+.contact { padding: 72px max(248px, calc((100% - 1440px) / 2 + 248px)); background: var(--ink-deep); color: #fff; }
 .contact h2 { margin-bottom: 24px; color: #fff; font-size: clamp(1.5rem, 3vw, 2.25rem); }
 .btn.invert { background: #fff; border-color: #fff; color: var(--ink-deep); }
 .btn.invert:hover { background: var(--tint); color: var(--ink-deep); }
@@ -288,7 +289,7 @@ main h3 { margin: 32px 0 12px; }
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  padding: 24px max(24px, calc((100vw - 1440px) / 2 + 24px));
+  padding: 24px max(24px, calc((100% - 1440px) / 2 + 24px));
   background: var(--ink-deep);
   color: var(--tint);
   border-top: 1px solid rgb(255 255 255 / 0.24);
