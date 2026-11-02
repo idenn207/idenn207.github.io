@@ -18,12 +18,14 @@ plan/index.html              제작 계획
 404.html                     없는 페이지
 css/style.css                공통 스타일
 js/main.js                   모바일 메뉴, 목차 활성화
-assets/                      캡처, 글꼴, 파비콘
+assets/                      캡처, 디자인 시안, 공유 이미지, 글꼴, 파비콘
 robots.txt, sitemap.xml      검색 정보
 .nojekyll                    Pages의 Jekyll 처리 끔
 ```
 
 공통 머리글과 바닥글은 각 HTML에 그대로 들어 있습니다. 바꿀 때는 모든 HTML을 함께 고칩니다.
+
+TeraB와 comax 이미지는 실제 화면이 아니라 디자인 시안이므로 캡션에 "디자인 시안"으로 표기합니다. recordWEB 이미지는 실제 화면을 데모 데이터로 캡처했습니다.
 
 `assets/fonts`의 Gothic A1은 SIL OFL 글꼴(`OFL.txt`)이며 ASCII와 KS X 1001 한글 2,350자로 줄였습니다. 이 범위 밖의 글자를 쓰면 대체 글꼴로 보입니다.
 
