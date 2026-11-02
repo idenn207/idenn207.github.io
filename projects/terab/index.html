@@ -12,8 +12,10 @@
   <meta property="og:title" content="TeraB 사례 | 박동민 포트폴리오">
   <meta property="og:description" content="NAS에서 돌아가는 셀프호스팅 파일 관리 서비스 TeraB의 개요, 목표, 사용 기술, 주요 기능, 코드, 역할, 결과를 정리했습니다.">
   <meta property="og:url" content="https://idenn207.github.io/projects/terab/">
-  <meta property="og:image" content="https://idenn207.github.io/assets/img/recordweb-dashboard.png">
-  <meta property="og:image:alt" content="recordWEB 녹화 현황 화면">
+  <meta property="og:image" content="https://idenn207.github.io/assets/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="박동민 포트폴리오 첫 화면. 셀프호스팅 서비스를 기획부터 구현까지 혼자 만든다는 제목과 recordWEB 화면, 서비스 3개의 이름이 있다.">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/assets/fonts/GothicA1-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/style.css">
@@ -26,9 +28,9 @@
     <a class="brand" href="/">박동민</a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">메뉴</button>
     <nav id="nav" aria-label="주 메뉴">
-      <a href="/projects/terab/" aria-current="page">TeraB</a>
-      <a href="/projects/recordweb/">recordWEB</a>
-      <a href="/projects/comax/">comax</a>
+      <a href="/#services" aria-current="true">서비스</a>
+      <a href="/#process">구축 과정</a>
+      <a href="/#about">소개</a>
       <a href="/plan/">계획</a>
       <a href="https://github.com/idenn207">GitHub</a>
     </nav>
@@ -59,6 +61,10 @@
 
       <section id="overview">
         <h2>개요</h2>
+        <figure class="shot">
+          <img src="/assets/img/terab-drive.webp" width="1440" height="900" fetchpriority="high" alt="TeraB 드라이브 디자인 시안. 왼쪽에 메뉴와 저장 용량, 가운데에 빠른 액세스, 폴더, 파일 목록, 오른쪽에 선택한 파일의 세부 정보가 있다.">
+          <figcaption><strong>디자인 시안</strong>. 실제 화면이 아니며 파일과 사용자는 모두 가공입니다.</figcaption>
+        </figure>
         <p>브라우저와 Android 앱의 요청을 Nginx가 받아 React 웹과 NestJS API로 나눕니다. 메타데이터는 PostgreSQL에, 파일은 S3 호환 MinIO에 두고, 뒤쪽 작업은 Redis와 BullMQ 워커가 맡습니다.</p>
         <figure class="diagram">
           <svg class="wide" viewBox="0 0 880 306" role="img" aria-label="TeraB 구성도. Browser와 Android App이 Nginx로 들어오고, Nginx는 Web과 API로 연결된다. API는 PostgreSQL, MinIO, Redis를 쓰고 MQ 워커는 Redis를 쓴다.">
@@ -109,7 +115,7 @@
         <ul>
           <li>외부 클라우드 없이 NAS에서 파일을 올리고, 공유하고, 지운다.</li>
           <li>웹과 Android 앱이 같은 API를 쓴다.</li>
-          <li>혼자 운영할 수 있도록 배포를 Docker Swarm 스택 하나로 묶는다.</li>
+          <li>배포를 <a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/docker-stack.yml">Docker Swarm 스택</a> 하나로 묶는다.</li>
           <li>NAS 디스크를 Windows PC의 게임 설치 공간으로 쓸 수 있는지 확인한다.</li>
         </ul>
       </section>
@@ -121,7 +127,7 @@
           <div><dt>저장</dt><dd>PostgreSQL 16, MinIO, Redis, BullMQ</dd></div>
           <div><dt>화면</dt><dd>React 19, Vite 8, Tailwind 4, Headless UI</dd></div>
           <div><dt>모바일</dt><dd>Capacitor Android</dd></div>
-          <div><dt>운영</dt><dd>Docker Swarm, storage-agent</dd></div>
+          <div><dt>배포</dt><dd>Docker Swarm, storage-agent</dd></div>
         </dl>
       </section>
 
@@ -139,6 +145,15 @@
             <tr><th scope="row">mount-credential</th><td>웹에서 마운트 자격증명 발급·회수</td></tr>
           </tbody>
         </table>
+        <h3>화면 시안</h3>
+        <figure class="shot">
+          <img src="/assets/img/terab-explorer.webp" width="1440" height="900" loading="lazy" alt="TeraB NAS 대시보드 디자인 시안. 사용 중인 용량, 다운로드, 업로드, 진행 중인 작업 카드 아래에 볼륨 4개와 최근 파일 목록이 있다.">
+          <figcaption><strong>디자인 시안</strong>. 실제 화면이 아니며 볼륨, 파일, 수치는 모두 가공입니다.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="/assets/img/terab-wireframe.webp" width="1280" height="820" loading="lazy" alt="TeraB 드라이브 와이어프레임. 왼쪽 메뉴, 위쪽 검색창, 폴더와 파일 격자, 오른쪽 아래 업로드 진행 창이 손그림 느낌으로 그려져 있다.">
+          <figcaption><strong>디자인 시안</strong>. 드라이브 화면의 와이어프레임입니다.</figcaption>
+        </figure>
         <h3>설계 기록</h3>
         <table class="ledger">
           <thead><tr><th scope="col">문서</th><th scope="col">결정</th><th scope="col">상태</th></tr></thead>
@@ -198,6 +213,13 @@
       </section>
     </main>
   </div>
+  <section class="contact" aria-labelledby="contact-title">
+    <h2 id="contact-title">다른 서비스</h2>
+    <p class="cta">
+      <a class="btn invert" href="/projects/recordweb/">recordWEB 사례 보기</a>
+      <a class="btn ghost" href="/projects/comax/">comax 사례 보기</a>
+    </p>
+  </section>
   <footer class="site-foot">
     <span>&copy; 2026 박동민</span>
     <a href="https://github.com/idenn207">GitHub</a>
