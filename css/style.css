@@ -252,15 +252,20 @@ main h3 { margin: 32px 0 12px; }
 .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); }
 .shot figcaption, .diagram figcaption { margin-top: 10px; font-size: 14px; color: var(--muted); }
 
-.diagram { margin: 24px 0 0; }
+.diagram { margin: 24px 0 0; container-type: inline-size; }
 .diagram svg { display: block; width: 100%; max-width: 880px; height: auto; }
 .diagram .tall { display: none; max-width: 350px; }
 .diagram marker path { fill: var(--ink); }
 .edge { fill: none; stroke: var(--ink); stroke-width: 1.5; }
 .node rect { fill: var(--tint); stroke: var(--ink); }
 .node text { fill: var(--text); font-size: 15px; font-weight: 700; text-anchor: middle; }
-.node .sub { fill: var(--muted); font-size: 13px; font-weight: 400; }
+.node .sub { fill: var(--muted); font-size: 14px; font-weight: 400; }
 .grp { fill: var(--ink); font-size: 14px; font-weight: 700; }
+/* SVG 글자는 폭 따라 줄어든다. 이 폭 아래로는 12px 밑이 되므로 세로 그림으로 바꾼다 */
+@container (max-width: 759px) {
+  .diagram .wide { display: none; }
+  .diagram .tall { display: block; }
+}
 
 /* 하단 */
 .case-head h1 { font-size: clamp(2.75rem, 6vw, 5rem); }
@@ -339,8 +344,6 @@ main h3 { margin: 32px 0 12px; }
   .form > div { grid-template-columns: 4.75rem minmax(0, 1fr); }
   .form dt { padding-inline: 10px; }
   .form dd { padding-inline: 12px; }
-  .diagram .wide { display: none; }
-  .diagram .tall { display: block; }
   .ledger, .ledger tbody, .ledger tr, .ledger th, .ledger td { display: block; width: 100%; }
   .ledger { border-top: 1px solid var(--rule); }
   .ledger thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }

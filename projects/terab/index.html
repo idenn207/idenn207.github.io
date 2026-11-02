@@ -61,7 +61,7 @@
         <h2>개요</h2>
         <p>브라우저와 Android 앱의 요청을 Nginx가 받아 React 웹과 NestJS API로 나눕니다. 메타데이터는 PostgreSQL에, 파일은 S3 호환 MinIO에 두고, 뒤쪽 작업은 Redis와 BullMQ 워커가 맡습니다.</p>
         <figure class="diagram">
-          <svg class="wide" viewBox="0 0 880 330" role="img" aria-label="TeraB 구성도. Browser와 Android App이 Nginx로 들어오고, Nginx는 Web과 API로 연결된다. API는 PostgreSQL, MinIO, Redis를 쓰고 MQ 워커는 Redis를 쓴다.">
+          <svg class="wide" viewBox="0 0 880 306" role="img" aria-label="TeraB 구성도. Browser와 Android App이 Nginx로 들어오고, Nginx는 Web과 API로 연결된다. API는 PostgreSQL, MinIO, Redis를 쓰고 MQ 워커는 Redis를 쓴다.">
             <defs><marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L8 4L0 8z"/></marker></defs>
             <text class="grp" x="20" y="24">클라이언트</text><text class="grp" x="235" y="24">서비스</text><text class="grp" x="710" y="24">저장소</text>
             <g class="edge" marker-end="url(#a)">
