@@ -47,5 +47,7 @@ const updateToc = () => {
 if (links.length) {
   addEventListener('scroll', updateToc, { passive: true });
   addEventListener('resize', updateToc);
+  // 이미 끝에 있으면 눌러도 스크롤이 일어나지 않는다
+  addEventListener('hashchange', updateToc);
   updateToc();
 }
