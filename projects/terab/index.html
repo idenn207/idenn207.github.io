@@ -20,7 +20,7 @@
   <link rel="preload" href="/assets/fonts/GothicA1-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/style.css">
   <script>document.documentElement.classList.add('js')</script>
-  <script src="/js/main.js" defer></script>
+  <script src="/js/main.js" defer onerror="document.documentElement.classList.remove('js')"></script>
 </head>
 <body>
   <a class="skip" href="#main">본문으로 건너뛰기</a>
@@ -31,7 +31,7 @@
       <a href="/#services" aria-current="true">서비스</a>
       <a href="/#process">구축 과정</a>
       <a href="/#about">소개</a>
-      <a href="/plan/">계획</a>
+      <a href="/plan/">제작 계획</a>
       <a href="https://github.com/idenn207">GitHub</a>
     </nav>
   </header>
@@ -115,7 +115,7 @@
         <ul>
           <li>외부 클라우드 없이 NAS에서 파일을 올리고, 공유하고, 지운다.</li>
           <li>웹과 Android 앱이 같은 API를 쓴다.</li>
-          <li>배포를 <a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/docker-stack.yml">Docker Swarm 스택</a> 하나로 묶는다.</li>
+          <li>배포를 Docker Swarm 스택 하나로 묶는다.</li>
           <li>NAS 디스크를 Windows PC의 게임 설치 공간으로 쓸 수 있는지 확인한다.</li>
         </ul>
       </section>
@@ -173,7 +173,7 @@
         <h2>코드</h2>
         <p>마운트 자격증명의 비밀값을 파일로 저장하는 코드입니다. 이름에 경로 구분자나 <code>..</code>가 있으면 쓰기 전에 거부해 저장 폴더 밖으로 나가지 못하게 하고, 파일은 0600, 폴더는 0700 권한으로 만듭니다.</p>
         <figure class="code">
-          <figcaption><span>services/api/src/mount-credential/secret-store.ts</span><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/services/api/src/mount-credential/secret-store.ts#L51-L56">커밋 고정 링크</a></figcaption>
+          <figcaption><span>services/api/src/mount-credential/secret-store.ts</span><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/services/api/src/mount-credential/secret-store.ts#L51-L56" aria-label="services/api/src/mount-credential/secret-store.ts 커밋 고정 링크">커밋 고정 링크</a></figcaption>
           <pre tabindex="0"><code>  private resolvePath(name: string): string {
     if (name.includes('/') || name.includes('\\') || name.includes('..')) {
       throw new ApiException('MOUNT_CREDENTIAL_SECRET_WRITE_FAILED');
@@ -182,7 +182,7 @@
   }</code></pre>
         </figure>
         <figure class="code">
-          <figcaption><span>services/api/src/mount-credential/secret-store.ts</span><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/services/api/src/mount-credential/secret-store.ts#L30-L40">커밋 고정 링크</a></figcaption>
+          <figcaption><span>services/api/src/mount-credential/secret-store.ts</span><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/services/api/src/mount-credential/secret-store.ts#L30-L40" aria-label="services/api/src/mount-credential/secret-store.ts 커밋 고정 링크">커밋 고정 링크</a></figcaption>
           <pre tabindex="0"><code>  async write(name: string, value: string): Promise&lt;string&gt; {
     const filePath = this.resolvePath(name);
     try {
@@ -209,14 +209,14 @@
           <li>웹에서 마운트 자격증명 발급·회수</li>
           <li>공개 저장소는 v0.1에서 보관하고, 후속 개발은 비공개로 이어 갑니다.</li>
         </ul>
-        <p><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/docs/spikes/phase0-steam-network-storage.md">측정 기록 보기</a></p>
       </section>
     </main>
   </div>
   <section class="contact" aria-labelledby="contact-title">
-    <h2 id="contact-title">다른 서비스</h2>
+    <h2 id="contact-title">코드와 다른 사례</h2>
     <p class="cta">
-      <a class="btn invert" href="/projects/recordweb/">recordWEB 사례 보기</a>
+      <a class="btn invert" href="https://github.com/idenn207/terab-archived">TeraB 코드 보기</a>
+      <a class="btn ghost" href="/projects/recordweb/">recordWEB 사례 보기</a>
       <a class="btn ghost" href="/projects/comax/">comax 사례 보기</a>
     </p>
   </section>

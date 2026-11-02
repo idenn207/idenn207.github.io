@@ -143,7 +143,7 @@ main section, .case-head {
   border-bottom: 2px solid var(--ink);
   scroll-margin-top: var(--head);
 }
-main > section:last-child { min-height: calc(100vh - var(--head) - 112px); border-bottom: 0; }
+main > section:last-child { border-bottom: 0; }
 main h3 { margin: 32px 0 12px; }
 
 /* 기입 칸 */
@@ -251,10 +251,12 @@ main h3 { margin: 32px 0 12px; }
 .split section + section { border-left: 1px solid var(--rule); }
 
 /* 표 */
-.ledger { width: 100%; border-collapse: collapse; }
+/* anywhere는 최소 폭을 없애 자동 열폭이 낱말 중간을 쪼갠다. 표에서는 넘칠 때만 끊는다 */
+.ledger { width: 100%; border-collapse: collapse; overflow-wrap: break-word; }
 .ledger th, .ledger td { padding: 10px 14px; border: 1px solid var(--rule); text-align: left; vertical-align: top; }
 .ledger thead th { background: var(--tint); color: var(--ink); font-size: 15px; font-weight: 700; white-space: nowrap; }
-.ledger tbody th { font-weight: 700; }
+.ledger tbody th { font-weight: 700; white-space: nowrap; }
+.ledger time { white-space: nowrap; }
 .ledger td a + a { margin-left: 12px; }
 .note { margin: 16px 0 0; }
 
@@ -353,13 +355,14 @@ main h3 { margin: 32px 0 12px; }
 
 @media (max-width: 1000px) {
   :root { --head: 48px; --gap: 20px; }
-  .site-head { position: relative; }
   .sheet { grid-template-columns: minmax(0, 1fr); }
-  .rail { position: sticky; top: 0; z-index: 10; }
+  .rail { position: sticky; top: var(--head); z-index: 10; }
   .toc { position: static; }
   .toc ol { display: flex; overflow-x: auto; scrollbar-width: none; }
   .toc a { padding: 12px 16px; border-bottom: 0; white-space: nowrap; }
-  main section, .case-head { padding-top: 36px; padding-bottom: 40px; scroll-margin-top: calc(var(--head) + 12px); }
+  main section, .case-head { padding-top: 36px; padding-bottom: 40px; }
+  /* 가로 목차 높이 50px만큼 더 띄워 도착한 제목이 가려지지 않게 한다 */
+  .rail ~ main :is(section, .case-head, a, pre) { scroll-margin-top: calc(var(--head) + 50px); }
   .hero { grid-template-columns: minmax(0, 1fr); }
   .hero-copy { padding: 32px var(--gap); }
   .hero-shot { grid-column: 1; grid-row: auto; padding: 24px var(--gap) 8px; }
@@ -372,7 +375,11 @@ main h3 { margin: 32px 0 12px; }
 }
 
 @media (max-width: 760px) {
-  .site-head { padding: 8px 20px; min-height: 56px; }
+  :root { --head: 56px; }
+  .site-head { padding: 4px 20px; }
+  /* JS 없이는 메뉴가 펼쳐져 머리글이 높아지므로 고정하지 않는다 */
+  html:not(.js) .site-head { position: relative; }
+  html:not(.js) .rail { top: 0; }
   .js .menu-btn {
     display: block;
     padding: 8px 14px;

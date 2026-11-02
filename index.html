@@ -20,7 +20,7 @@
   <link rel="preload" href="/assets/fonts/GothicA1-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/style.css">
   <script>document.documentElement.classList.add('js')</script>
-  <script src="/js/main.js" defer></script>
+  <script src="/js/main.js" defer onerror="document.documentElement.classList.remove('js')"></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"박동민","url":"https://idenn207.github.io/","sameAs":["https://github.com/idenn207"]}</script>
 </head>
 <body>
@@ -32,7 +32,7 @@
       <a href="/#services">서비스</a>
       <a href="/#process">구축 과정</a>
       <a href="/#about">소개</a>
-      <a href="/plan/">계획</a>
+      <a href="/plan/">제작 계획</a>
       <a href="https://github.com/idenn207">GitHub</a>
     </nav>
   </header>
@@ -131,7 +131,7 @@
           <li>
             <h3>구현</h3>
             <p>재작성은 달라진 점과 뺀 기능까지 기록합니다.</p>
-            <a href="https://github.com/idenn207/recordWEB/blob/0a58212e84acd8775c9ef03bb01385a74f0c07e3/docs/typescript-rewrite.md">recordWEB 재작성 문서</a>
+            <a href="/projects/recordweb/#result">recordWEB 재작성 결과</a>
           </li>
           <li>
             <h3>운영</h3>
@@ -146,7 +146,8 @@
           <h2>소개</h2>
           <dl class="form">
             <div><dt>학과</dt><dd>서울사이버대학교 인공지능학과 3학년</dd></div>
-            <div><dt>주 스택</dt><dd>Vite/React, Tailwind, shadcn/ui, FSD, NestJS, MySQL, Drizzle</dd></div>
+            <div><dt>주 스택</dt><dd>React, Vite, Tailwind, FSD, NestJS, Drizzle, PostgreSQL, Go, SQLite</dd></div>
+            <div><dt>이력</dt><dd>2025년 순수 JS 게임과 코드 에디터 제작, 2026년 셀프호스팅 서비스 3개 개발</dd></div>
           </dl>
         </section>
 
@@ -155,12 +156,12 @@
           <table class="ledger">
             <thead><tr><th scope="col">프로젝트</th><th scope="col">내용</th><th scope="col">링크</th></tr></thead>
             <tbody>
-              <tr><th scope="row">Code Editor</th><td>순수 JS로 만든 브라우저 코드 에디터</td><td><a href="https://idenn207.github.io/Code_Editor_purejs_v2/">라이브</a> <a href="https://github.com/idenn207/Code_Editor_purejs_v2">저장소</a></td></tr>
-              <tr><th scope="row">mccp</th><td>개인용 Claude Code 플러그인 모음</td><td><a href="https://github.com/idenn207/mccp">저장소</a></td></tr>
-              <tr><th scope="row">Poker-Roguelike_purejs</th><td>포커 기반 로그라이크 게임, 순수 HTML, CSS, JS</td><td><a href="https://github.com/idenn207/Poker-Roguelike_purejs">저장소</a></td></tr>
-              <tr><th scope="row">Slay-the-Spire_purejs</th><td>Slay the Spire를 순수 JS로 구현</td><td><a href="https://github.com/idenn207/Slay-the-Spire_purejs">저장소</a></td></tr>
-              <tr><th scope="row">Vampire_Survivors_Purejs</th><td>뱀파이어 서바이벌류 게임</td><td><a href="https://github.com/idenn207/Vampire_Survivors_Purejs">저장소</a></td></tr>
-              <tr><th scope="row">custom-new-tab-extension</th><td>Chrome 새 탭 스타일을 바꾸는 확장 프로그램</td><td><a href="https://github.com/idenn207/custom-new-tab-extension">저장소</a></td></tr>
+              <tr><th scope="row">Code Editor</th><td>순수 JS로 만든 브라우저 코드 에디터</td><td><a href="https://idenn207.github.io/Code_Editor_purejs_v2/" aria-label="Code Editor 라이브">라이브</a> <a href="https://github.com/idenn207/Code_Editor_purejs_v2" aria-label="Code Editor 저장소">저장소</a></td></tr>
+              <tr><th scope="row">mccp</th><td>개인용 Claude Code 플러그인 모음</td><td><a href="https://github.com/idenn207/mccp" aria-label="mccp 저장소">저장소</a></td></tr>
+              <tr><th scope="row">Poker-Roguelike_purejs</th><td>포커 기반 로그라이크 게임, 순수 HTML, CSS, JS</td><td><a href="https://github.com/idenn207/Poker-Roguelike_purejs" aria-label="Poker-Roguelike_purejs 저장소">저장소</a></td></tr>
+              <tr><th scope="row">Slay-the-Spire_purejs</th><td>Slay the Spire를 순수 JS로 구현</td><td><a href="https://github.com/idenn207/Slay-the-Spire_purejs" aria-label="Slay-the-Spire_purejs 저장소">저장소</a></td></tr>
+              <tr><th scope="row">Vampire_Survivors_Purejs</th><td>뱀파이어 서바이벌류 게임</td><td><a href="https://github.com/idenn207/Vampire_Survivors_Purejs" aria-label="Vampire_Survivors_Purejs 저장소">저장소</a></td></tr>
+              <tr><th scope="row">custom-new-tab-extension</th><td>Chrome 새 탭 스타일을 바꾸는 확장 프로그램</td><td><a href="https://github.com/idenn207/custom-new-tab-extension" aria-label="custom-new-tab-extension 저장소">저장소</a></td></tr>
             </tbody>
           </table>
         </section>

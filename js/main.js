@@ -27,7 +27,13 @@ let current = null;
 
 const updateToc = () => {
   const line = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--head')) + 80;
-  const next = links[sections.findLastIndex((s) => s.getBoundingClientRect().top <= line)] ?? null;
+  let index = sections.findLastIndex((s) => s.getBoundingClientRect().top <= line);
+  // 끝에 닿으면 마지막 절들은 기준선까지 못 올라오므로 누른 항목, 없으면 마지막 항목을 켠다
+  if (innerHeight + scrollY >= document.documentElement.scrollHeight - 1) {
+    const clicked = links.findIndex((a) => a.hash === location.hash);
+    index = clicked >= index ? clicked : links.length - 1;
+  }
+  const next = links[index] ?? null;
   if (next === current) return;
   current?.removeAttribute('aria-current');
   current = next;
@@ -41,5 +47,7 @@ const updateToc = () => {
 if (links.length) {
   addEventListener('scroll', updateToc, { passive: true });
   addEventListener('resize', updateToc);
+  // 이미 끝에 있으면 눌러도 스크롤이 일어나지 않는다
+  addEventListener('hashchange', updateToc);
   updateToc();
 }
