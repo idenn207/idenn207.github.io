@@ -31,9 +31,9 @@ const updateToc = () => {
   current = next;
   if (!current) return;
   current.setAttribute('aria-current', 'true');
-  // 좁은 화면의 가로 목차에서 활성 항목이 보이도록 가운데로 옮긴다
+  // 가로 목차는 활성 항목이 잘릴 때만 옮긴다. 다 보이는 항목을 누르면 그 자리에 그대로 둔다
   const list = current.closest('ol');
-  list.scrollLeft = current.offsetLeft - (list.clientWidth - current.offsetWidth) / 2;
+  list.scrollLeft = Math.min(current.offsetLeft, Math.max(list.scrollLeft, current.offsetLeft + current.offsetWidth - list.clientWidth));
 };
 
 if (links.length) {

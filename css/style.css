@@ -332,6 +332,7 @@ main h3 { margin: 32px 0 12px; }
   }
   .js #nav.open { display: block; }
   .js #nav a { display: block; padding: 12px; }
+  .toc a { padding-inline: 14px; }
   .steps { grid-template-columns: minmax(0, 1fr); }
   .form > div { grid-template-columns: 4.75rem minmax(0, 1fr); }
   .form dt { padding-inline: 10px; }
