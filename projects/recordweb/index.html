@@ -98,7 +98,7 @@
 
       <section id="code">
         <h2>코드</h2>
-        <p>녹화 도구를 라이브러리가 아닌 subprocess로 실행합니다. 명령 인자를 만드는 부분은 실행과 분리한 순수 함수로 둡니다.</p>
+        <p>녹화 도구를 라이브러리가 아닌 subprocess로 실행합니다. 명령 인자를 만드는 부분은 실행과 분리한 함수로 둡니다.</p>
         <figure class="code">
           <figcaption><span>apps/api/src/recorder/commands.ts</span><a href="https://github.com/idenn207/recordWEB/blob/0a58212e84acd8775c9ef03bb01385a74f0c07e3/apps/api/src/recorder/commands.ts#L24-L41">커밋 고정 링크</a></figcaption>
           <pre tabindex="0"><code>export function chzzkRecordArgs(ch: Channel, meta: LiveMeta, cookies: ChzzkCookies, outputPath: string): string[] {
