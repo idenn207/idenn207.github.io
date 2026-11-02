@@ -20,7 +20,7 @@
   <link rel="preload" href="/assets/fonts/GothicA1-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/style.css">
   <script>document.documentElement.classList.add('js')</script>
-  <script src="/js/main.js" defer></script>
+  <script src="/js/main.js" defer onerror="document.documentElement.classList.remove('js')"></script>
 </head>
 <body>
   <a class="skip" href="#main">본문으로 건너뛰기</a>
@@ -66,8 +66,9 @@
           <figcaption><strong>디자인 시안</strong>. 실제 화면이 아닙니다.</figcaption>
         </figure>
         <p>손으로 맞추던 <code>.env</code> 파일을 서버 한 곳으로 모으고, 개발 PC, CI, 프로덕션 컨테이너에 암호화된 시크릿을 전달합니다.</p>
+        <p><code>secret</code> CLI는 Go 1.25 이상에서 <code>go build -o secret ./cmd/cli</code>로 빌드해 PATH에 둡니다.</p>
         <figure class="code term">
-          <figcaption><span>README 빠른 시작</span><a href="https://github.com/idenn207/comax/blob/c01dd0944d18ac8dcc0f54ca0d08bbb567e71ad3/README.md#quickstart">커밋 고정 링크</a></figcaption>
+          <figcaption><span>README 빠른 시작</span><a href="https://github.com/idenn207/comax/blob/c01dd0944d18ac8dcc0f54ca0d08bbb567e71ad3/README.md#quickstart" aria-label="README 빠른 시작 커밋 고정 링크">커밋 고정 링크</a></figcaption>
           <pre tabindex="0"><code>docker compose -f deploy/compose/docker-compose.yml up -d --build
 docker compose -f deploy/compose/docker-compose.yml logs secret-server \
   | grep -A 1 "bootstrap admin token"   # capture the token (one shot)
@@ -125,7 +126,7 @@ secret run -- npm run dev         # secrets injected as env, no disk write</code
         <h2>코드</h2>
         <p>GCM은 같은 키와 nonce를 다시 쓰면 안전하지 않습니다. 그래서 호출부가 nonce를 넘기지 못하게 하고, 호출마다 <code>crypto/rand</code>로 새로 뽑아 암호문 앞에 붙입니다.</p>
         <figure class="code">
-          <figcaption><span>internal/crypto/aesgcm.go</span><a href="https://github.com/idenn207/comax/blob/c01dd0944d18ac8dcc0f54ca0d08bbb567e71ad3/internal/crypto/aesgcm.go#L51-L63">커밋 고정 링크</a></figcaption>
+          <figcaption><span>internal/crypto/aesgcm.go</span><a href="https://github.com/idenn207/comax/blob/c01dd0944d18ac8dcc0f54ca0d08bbb567e71ad3/internal/crypto/aesgcm.go#L51-L63" aria-label="internal/crypto/aesgcm.go 커밋 고정 링크">커밋 고정 링크</a></figcaption>
           <pre tabindex="0"><code>func Seal(key, plaintext []byte) ([]byte, error) {
 	gcm, err := newAEAD(key)
 	if err != nil {
@@ -158,9 +159,10 @@ secret run -- npm run dev         # secrets injected as env, no disk write</code
     </main>
   </div>
   <section class="contact" aria-labelledby="contact-title">
-    <h2 id="contact-title">다른 서비스</h2>
+    <h2 id="contact-title">코드와 다른 사례</h2>
     <p class="cta">
-      <a class="btn invert" href="/projects/terab/">TeraB 사례 보기</a>
+      <a class="btn invert" href="https://github.com/idenn207/comax">comax 코드 보기</a>
+      <a class="btn ghost" href="/projects/terab/">TeraB 사례 보기</a>
       <a class="btn ghost" href="/projects/recordweb/">recordWEB 사례 보기</a>
     </p>
   </section>

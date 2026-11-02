@@ -20,7 +20,7 @@
   <link rel="preload" href="/assets/fonts/GothicA1-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/style.css">
   <script>document.documentElement.classList.add('js')</script>
-  <script src="/js/main.js" defer></script>
+  <script src="/js/main.js" defer onerror="document.documentElement.classList.remove('js')"></script>
 </head>
 <body>
   <a class="skip" href="#main">본문으로 건너뛰기</a>
@@ -109,6 +109,7 @@
         <table class="ledger">
           <thead><tr><th scope="col">버전</th><th scope="col">날짜</th><th scope="col">내용</th></tr></thead>
           <tbody>
+            <tr><th scope="row">0.2.0</th><td data-label="날짜"><time datetime="2026-11-02">2026-11-02</time></td><td data-label="내용">제작 계획을 계획수립 시트와 일치시키고, 태블릿과 모바일에서 머리글과 목차를 고정. 외부 문서 링크를 사이트 안 내용으로 대체하고 사례별 코드 버튼과 소개의 이력 추가.</td></tr>
             <tr><th scope="row">0.1.0</th><td data-label="날짜"><time datetime="2026-11-02">2026-11-02</time></td><td data-label="내용">Code Editor 페이지를 <a href="https://github.com/idenn207/idenn207.github.io/tree/legacy-code-editor">legacy-code-editor 태그</a>로 보존하고 포트폴리오로 교체. 별도 아카이브 경로 대신 홈의 요약 표로 구성.</td></tr>
           </tbody>
         </table>
