@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>comax 사례 | 박동민 포트폴리오</title>
+  <meta name="description" content="Go 단일 바이너리로 만든 self-host 시크릿 서버와 CLI comax의 개요, 목표, 사용 기술, 주요 기능, 코드, 역할, 결과를 정리했습니다.">
+  <link rel="canonical" href="https://idenn207.github.io/projects/comax/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="박동민 포트폴리오">
+  <meta property="og:title" content="comax 사례 | 박동민 포트폴리오">
+  <meta property="og:description" content="Go 단일 바이너리로 만든 self-host 시크릿 서버와 CLI comax의 개요, 목표, 사용 기술, 주요 기능, 코드, 역할, 결과를 정리했습니다.">
+  <meta property="og:url" content="https://idenn207.github.io/projects/comax/">
+  <meta property="og:image" content="https://idenn207.github.io/assets/img/recordweb-dashboard.png">
+  <meta property="og:image:alt" content="recordWEB 녹화 현황 화면">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/GothicA1-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+  <header class="site-head">
+    <a class="brand" href="/">박동민</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">메뉴</button>
+    <nav id="nav" aria-label="주 메뉴">
+      <a href="/projects/terab/">TeraB</a>
+      <a href="/projects/recordweb/">recordWEB</a>
+      <a href="/projects/comax/" aria-current="page">comax</a>
+      <a href="/plan/">계획</a>
+      <a href="https://github.com/idenn207">GitHub</a>
+    </nav>
+  </header>
+  <div class="sheet">
+    <aside class="rail">
+      <nav class="toc" aria-label="이 페이지 목차">
+        <ol>
+          <li><a href="#overview">개요</a></li>
+          <li><a href="#goals">목표</a></li>
+          <li><a href="#stack">사용 기술</a></li>
+          <li><a href="#features">주요 기능</a></li>
+          <li><a href="#code">코드</a></li>
+          <li><a href="#role">역할</a></li>
+          <li><a href="#result">결과</a></li>
+        </ol>
+      </nav>
+    </aside>
+    <main id="main">
+      <header class="case-head">
+        <h1>comax</h1>
+        <p>self-host 시크릿 서버와 CLI</p>
+        <dl class="form">
+          <div><dt>상태</dt><dd><strong>M1~M7 구현</strong>, M8 공개 배포 미완</dd></div>
+          <div><dt>저장소</dt><dd><a href="https://github.com/idenn207/comax">idenn207/comax</a> (브랜치 master)</dd></div>
+        </dl>
+      </header>
+
+      <section id="overview">
+        <h2>개요</h2>
+        <p>손으로 맞추던 <code>.env</code> 파일을 서버 한 곳으로 모으고, 개발 PC, CI, 운영 컨테이너에 암호화된 시크릿을 전달합니다.</p>
+        <figure class="code term">
+          <figcaption><span>README 빠른 시작</span><a href="https://github.com/idenn207/comax/blob/c01dd0944d18ac8dcc0f54ca0d08bbb567e71ad3/README.md#quickstart">커밋 고정 링크</a></figcaption>
+          <pre tabindex="0"><code>docker compose -f deploy/compose/docker-compose.yml up -d --build
+docker compose -f deploy/compose/docker-compose.yml logs secret-server \
+  | grep -A 1 "bootstrap admin token"   # capture the token (one shot)
+
+secret login --server http://localhost:8080 --token &lt;token&gt;
+secret init  --project my-app --envs local,dev,prod --default-env local
+secret push  --file .env
+secret run -- npm run dev         # secrets injected as env, no disk write</code></pre>
+        </figure>
+      </section>
+
+      <section id="goals">
+        <h2>목표</h2>
+        <ul>
+          <li>외부 Postgres나 Redis 없이 SQLite 파일 하나로 NAS에서 돌린다.</li>
+          <li><code>secret run</code> 하나로 작업 위치에 맞는 환경변수를 넣는다.</li>
+          <li>GitHub Secret 등록 없이 Actions에서 시크릿을 쓴다.</li>
+          <li><code>secret render</code>로 설정 파일을 환경별로 채운다.</li>
+        </ul>
+      </section>
+
+      <section id="stack">
+        <h2>사용 기술</h2>
+        <dl class="form">
+          <div><dt>서버</dt><dd>Go 1.25, 단일 바이너리, SQLite</dd></div>
+          <div><dt>암호화</dt><dd>AES-256-GCM</dd></div>
+          <div><dt>화면</dt><dd>React 대시보드(Vite), 서버 바이너리에 내장</dd></div>
+          <div><dt>연동</dt><dd>GitHub Action, Node/TS SDK</dd></div>
+        </dl>
+      </section>
+
+      <section id="features">
+        <h2>주요 기능</h2>
+        <table class="ledger">
+          <thead><tr><th scope="col">단계</th><th scope="col">내용</th><th scope="col">상태</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">M1</th><td>서버와 CLI, <code>secret run</code></td><td>구현</td></tr>
+            <tr><th scope="row">M2</th><td>운영자 대시보드</td><td>구현</td></tr>
+            <tr><th scope="row">M3</th><td>GitHub Actions 연동</td><td>구현</td></tr>
+            <tr><th scope="row">M4</th><td>웹훅, 시크릿 참조와 덮어쓰기</td><td>구현</td></tr>
+            <tr><th scope="row">M5</th><td>Node/TS SDK</td><td>구현</td></tr>
+            <tr><th scope="row">M6</th><td>소개와 문서 사이트</td><td>구현</td></tr>
+            <tr><th scope="row">M7</th><td><code>secret render</code> 설정 템플릿</td><td>구현</td></tr>
+            <tr><th scope="row">M8</th><td>바이너리, npm, Action 공개 배포</td><td>미완</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="code">
+        <h2>코드</h2>
+        <p>GCM은 같은 키와 nonce를 다시 쓰면 안전하지 않습니다. 그래서 호출부가 nonce를 넘기지 못하게 하고, 호출마다 <code>crypto/rand</code>로 새로 뽑아 암호문 앞에 붙입니다.</p>
+        <figure class="code">
+          <figcaption><span>internal/crypto/aesgcm.go</span><a href="https://github.com/idenn207/comax/blob/c01dd0944d18ac8dcc0f54ca0d08bbb567e71ad3/internal/crypto/aesgcm.go#L51-L63">커밋 고정 링크</a></figcaption>
+          <pre tabindex="0"><code>func Seal(key, plaintext []byte) ([]byte, error) {
+	gcm, err := newAEAD(key)
+	if err != nil {
+		return nil, err
+	}
+	nonce := make([]byte, gcm.NonceSize())
+	if _, err := io.ReadFull(rand.Reader, nonce); err != nil {
+		return nil, fmt.Errorf("read nonce: %w", err)
+	}
+	// AEAD.Seal appends ciphertext+tag to dst (first arg); reusing the
+	// nonce slice for dst gives us nonce || ct+tag in one buffer.
+	return gcm.Seal(nonce, nonce, plaintext, nil), nil
+}</code></pre>
+        </figure>
+      </section>
+
+      <section id="role">
+        <h2>역할</h2>
+        <p>1인 개발입니다. 서버, CLI, 대시보드, SDK, 위협 모델 문서를 혼자 맡았습니다.</p>
+      </section>
+
+      <section id="result">
+        <h2>결과</h2>
+        <ul>
+          <li>M1~M7 구현 완료</li>
+          <li>M8 공개 배포는 미완, 릴리스 0건</li>
+        </ul>
+        <p><a href="https://github.com/idenn207/comax/blob/c01dd0944d18ac8dcc0f54ca0d08bbb567e71ad3/docs/threat-model.md">위협 모델 보기</a></p>
+      </section>
+    </main>
+  </div>
+  <footer class="site-foot">
+    <span>&copy; 2026 박동민</span>
+    <a href="https://github.com/idenn207">GitHub</a>
+  </footer>
+</body>
+</html>
