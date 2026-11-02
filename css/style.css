@@ -50,6 +50,8 @@ body {
 ::selection { background: var(--ink); color: #fff; }
 
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+/* 뒤로 탭할 때 포커스가 고정 머리글과 목차 아래로 숨지 않게 한다 */
+a, pre { scroll-margin-block: calc(var(--head) + 12px); }
 
 a { color: var(--ink); text-underline-offset: 3px; }
 a:hover { color: var(--ink-deep); text-decoration-thickness: 2px; }
