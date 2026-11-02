@@ -1,217 +1,182 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Code Editor IDE - VSCode-inspired Pure JavaScript IDE</title>
-  <link rel="stylesheet" href="styles/editor.css">
-  <link rel="stylesheet" href="styles/ide.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      height: 100%;
-      overflow: hidden;
-    }
-
-    /* Loading screen */
-    .ide-loading {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #1e1e1e;
-      color: #d4d4d4;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      z-index: 10000;
-    }
-
-    .ide-loading-logo {
-      font-size: 48px;
-      margin-bottom: 16px;
-      animation: pulse 1.5s ease-in-out infinite;
-    }
-
-    .ide-loading-text {
-      font-size: 14px;
-      color: #858585;
-    }
-
-    @keyframes pulse {
-      0%,
-      100% {
-        opacity: 0.5;
-      }
-      50% {
-        opacity: 1;
-      }
-    }
-
-    .ide-loading.hidden {
-      display: none;
-    }
-
-    /* Browser compatibility warning */
-    .ide-compat-warning {
-      display: none;
-      position: fixed;
-      inset: 0;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #1e1e1e;
-      color: #d4d4d4;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      z-index: 10001;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .ide-compat-warning.visible {
-      display: flex;
-    }
-
-    .ide-compat-warning h1 {
-      color: #f48771;
-      margin-bottom: 16px;
-    }
-
-    .ide-compat-warning p {
-      max-width: 500px;
-      line-height: 1.6;
-      margin-bottom: 12px;
-    }
-
-    .ide-compat-warning a {
-      color: #3794ff;
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>박동민 포트폴리오 | 직접 만든 서비스 3개</title>
+  <meta name="description" content="서울사이버대학교 인공지능학과 3학년 박동민의 포트폴리오입니다. TeraB, recordWEB, comax의 문제, 해결, 코드, 결과를 모았습니다.">
+  <link rel="canonical" href="https://idenn207.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="박동민 포트폴리오">
+  <meta property="og:title" content="박동민 포트폴리오 | 직접 만든 서비스 3개">
+  <meta property="og:description" content="서울사이버대학교 인공지능학과 3학년 박동민의 포트폴리오입니다. TeraB, recordWEB, comax의 문제, 해결, 코드, 결과를 모았습니다.">
+  <meta property="og:url" content="https://idenn207.github.io/">
+  <meta property="og:image" content="https://idenn207.github.io/assets/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="박동민 포트폴리오 첫 화면. 셀프호스팅 서비스를 기획부터 구현까지 혼자 만든다는 제목과 recordWEB 화면, 서비스 3개의 이름이 있다.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/GothicA1-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="/js/main.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"박동민","url":"https://idenn207.github.io/","sameAs":["https://github.com/idenn207"]}</script>
 </head>
-
 <body>
-  <!-- Loading screen -->
-  <div class="ide-loading" id="loading-screen">
-    <div class="ide-loading-logo">{ }</div>
-    <div class="ide-loading-text">Loading Code Editor IDE...</div>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+  <header class="site-head">
+    <a class="brand" href="/">박동민</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">메뉴</button>
+    <nav id="nav" aria-label="주 메뉴">
+      <a href="/#services">서비스</a>
+      <a href="/#process">구축 과정</a>
+      <a href="/#about">소개</a>
+      <a href="/plan/">계획</a>
+      <a href="https://github.com/idenn207">GitHub</a>
+    </nav>
+  </header>
+  <div class="sheet no-rail">
+    <main id="main">
+      <section class="hero">
+        <div class="hero-copy">
+          <h1>셀프호스팅 서비스를 기획부터 구현까지 혼자 만듭니다</h1>
+          <p>서울사이버대학교 인공지능학과 3학년 박동민입니다. 파일 관리, 라이브 녹화, 시크릿 서버를 1인 개발했습니다.</p>
+          <p class="cta">
+            <a class="btn invert" href="#services">서비스 사례 보기</a>
+            <a class="btn ghost" href="https://github.com/idenn207">GitHub 프로필</a>
+          </p>
+        </div>
+        <ul class="lineup">
+          <li><a href="/projects/terab/"><strong>TeraB</strong> <span>셀프호스팅 파일 관리 서비스</span></a></li>
+          <li><a href="/projects/recordweb/"><strong>recordWEB</strong> <span>라이브 자동 녹화 웹 UI</span></a></li>
+          <li><a href="/projects/comax/"><strong>comax</strong> <span>self-host 시크릿 서버와 CLI</span></a></li>
+        </ul>
+        <figure class="hero-shot">
+          <a href="/projects/recordweb/"><img src="/assets/img/recordweb-dashboard.webp" width="1440" height="900" fetchpriority="high" alt="recordWEB 녹화 현황 화면. CPU, 메모리, 디스크 사용량 아래에 데모 채널 6개의 녹화 상태와 자동 녹화 토글이 보인다."></a>
+          <figcaption>recordWEB 실제 화면. 데모 데이터로 캡처했습니다.</figcaption>
+        </figure>
+      </section>
+
+      <section id="services">
+        <h2>서비스</h2>
+        <div class="svcs">
+          <article class="svc">
+            <figure class="shot">
+              <a href="/projects/terab/"><img src="/assets/img/terab-drive.webp" width="1440" height="900" loading="lazy" alt="TeraB 드라이브 디자인 시안. 왼쪽에 메뉴와 저장 용량, 가운데에 빠른 액세스, 폴더, 파일 목록, 오른쪽에 선택한 파일의 세부 정보가 있다."></a>
+              <figcaption><strong>디자인 시안</strong>. 파일과 사용자는 가공입니다.</figcaption>
+            </figure>
+            <div class="svc-name">
+              <h3>TeraB</h3>
+              <p>NAS에서 돌아가는 셀프호스팅 파일 관리 서비스</p>
+            </div>
+            <dl class="form">
+              <div><dt>문제</dt><dd>개인 파일을 외부 클라우드에 두지 않고 NAS에서 관리하고, 게임 설치 공간으로도 쓰고 싶었습니다.</dd></div>
+              <div><dt>해결</dt><dd>NestJS API와 React 웹, Android 앱으로 파일, 휴지통, 2단계 인증을 만들고 NAS 디스크 마운트를 실험했습니다.</dd></div>
+              <div><dt>상태</dt><dd><strong>공개 저장소 보관됨</strong>, 후속은 비공개 개발</dd></div>
+              <div><dt>스택</dt><dd>NestJS, Drizzle, PostgreSQL, MinIO, React, Docker Swarm</dd></div>
+            </dl>
+            <a class="btn" href="/projects/terab/">TeraB 사례 보기</a>
+          </article>
+          <article class="svc">
+            <figure class="shot">
+              <a href="/projects/recordweb/"><img src="/assets/img/recordweb-channels.webp" width="1440" height="900" loading="lazy" alt="recordWEB 채널 관리 화면. 채널, 저장 경로, 품질, 자동 녹화, YouTube 업로드 열로 이루어진 표가 보인다."></a>
+              <figcaption><strong>실제 화면</strong>. 데모 데이터로 캡처했습니다.</figcaption>
+            </figure>
+            <div class="svc-name">
+              <h3>recordWEB</h3>
+              <p>치지직, 유튜브, X 스페이스 라이브 자동 녹화를 NAS에서 관리하는 웹 UI</p>
+            </div>
+            <dl class="form">
+              <div><dt>문제</dt><dd>여러 플랫폼의 라이브를 놓치지 않고 저장하려면 방송 시작을 계속 확인해야 했습니다.</dd></div>
+              <div><dt>해결</dt><dd>채널을 등록하면 자동으로 녹화하고, 파일 정리와 YouTube 업로드까지 웹에서 처리합니다.</dd></div>
+              <div><dt>상태</dt><dd><strong>개인 NAS에서 사용 중</strong>, Python에서 TypeScript로 재작성</dd></div>
+              <div><dt>스택</dt><dd>NestJS, React, Vite, Tailwind 4, Headless UI, FSD</dd></div>
+            </dl>
+            <a class="btn" href="/projects/recordweb/">recordWEB 사례 보기</a>
+          </article>
+          <article class="svc">
+            <figure class="shot">
+              <a href="/projects/comax/"><img src="/assets/img/comax-home.webp" width="1425" height="900" loading="lazy" alt="comax 소개 페이지 디자인 시안. 어두운 배경에 흩어진 시크릿을 한곳에서 안전하게 관리한다는 제목과, comax 주변을 도는 시크릿 이름들이 있다."></a>
+              <figcaption><strong>디자인 시안</strong>. 실제 화면이 아닙니다.</figcaption>
+            </figure>
+            <div class="svc-name">
+              <h3>comax</h3>
+              <p>self-host 시크릿 서버와 CLI</p>
+            </div>
+            <dl class="form">
+              <div><dt>문제</dt><dd>프로젝트마다 <code>.env</code> 파일을 손으로 맞추는 일이 반복됐습니다.</dd></div>
+              <div><dt>해결</dt><dd>Go 단일 바이너리와 SQLite로 서버를 띄우고, <code>secret run</code>으로 실행 명령에만 시크릿을 넣습니다.</dd></div>
+              <div><dt>상태</dt><dd><strong>M1~M7 구현</strong>, M8 공개 배포 미완</dd></div>
+              <div><dt>스택</dt><dd>Go 1.25, SQLite, AES-256-GCM, React 대시보드, Node/TS SDK</dd></div>
+            </dl>
+            <a class="btn" href="/projects/comax/">comax 사례 보기</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="process">
+        <h2>구축 과정</h2>
+        <ol class="steps">
+          <li>
+            <h3>계획</h3>
+            <p>기능과 복잡도를 마일스톤 표로 먼저 나눕니다.</p>
+            <a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/docs/planning/milestones.md">TeraB 마일스톤</a>
+          </li>
+          <li>
+            <h3>설계</h3>
+            <p>결정과 대안, 결과를 ADR로 남깁니다.</p>
+            <a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/docs/adr/INDEX.md">TeraB ADR 6건</a>
+          </li>
+          <li>
+            <h3>구현</h3>
+            <p>재작성은 달라진 점과 뺀 기능까지 기록합니다.</p>
+            <a href="https://github.com/idenn207/recordWEB/blob/0a58212e84acd8775c9ef03bb01385a74f0c07e3/docs/typescript-rewrite.md">recordWEB 재작성 문서</a>
+          </li>
+          <li>
+            <h3>운영</h3>
+            <p>recordWEB을 개인 NAS에서 사용 중입니다.</p>
+            <a href="/projects/recordweb/">recordWEB 사례</a>
+          </li>
+        </ol>
+      </section>
+
+      <div class="split">
+        <section id="about">
+          <h2>소개</h2>
+          <dl class="form">
+            <div><dt>학과</dt><dd>서울사이버대학교 인공지능학과 3학년</dd></div>
+            <div><dt>주 스택</dt><dd>Vite/React, Tailwind, shadcn/ui, FSD, NestJS, MySQL, Drizzle</dd></div>
+          </dl>
+        </section>
+
+        <section id="others">
+          <h2>그 밖의 프로젝트</h2>
+          <table class="ledger">
+            <thead><tr><th scope="col">프로젝트</th><th scope="col">내용</th><th scope="col">링크</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Code Editor</th><td>순수 JS로 만든 브라우저 코드 에디터</td><td><a href="https://idenn207.github.io/Code_Editor_purejs_v2/">라이브</a> <a href="https://github.com/idenn207/Code_Editor_purejs_v2">저장소</a></td></tr>
+              <tr><th scope="row">mccp</th><td>개인용 Claude Code 플러그인 모음</td><td><a href="https://github.com/idenn207/mccp">저장소</a></td></tr>
+              <tr><th scope="row">Poker-Roguelike_purejs</th><td>포커 기반 로그라이크 게임, 순수 HTML, CSS, JS</td><td><a href="https://github.com/idenn207/Poker-Roguelike_purejs">저장소</a></td></tr>
+              <tr><th scope="row">Slay-the-Spire_purejs</th><td>Slay the Spire를 순수 JS로 구현</td><td><a href="https://github.com/idenn207/Slay-the-Spire_purejs">저장소</a></td></tr>
+              <tr><th scope="row">Vampire_Survivors_Purejs</th><td>뱀파이어 서바이벌류 게임</td><td><a href="https://github.com/idenn207/Vampire_Survivors_Purejs">저장소</a></td></tr>
+              <tr><th scope="row">custom-new-tab-extension</th><td>Chrome 새 탭 스타일을 바꾸는 확장 프로그램</td><td><a href="https://github.com/idenn207/custom-new-tab-extension">저장소</a></td></tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </main>
   </div>
-
-  <!-- Browser compatibility warning -->
-  <div class="ide-compat-warning" id="compat-warning">
-    <h1>Browser Not Supported</h1>
-    <p>
-      This IDE requires the <strong>File System Access API</strong> which is only available in:
+  <section class="contact" aria-labelledby="contact-title">
+    <h2 id="contact-title">코드와 작업 기록은 GitHub에 있습니다</h2>
+    <p class="cta">
+      <a class="btn invert" href="https://github.com/idenn207">github.com/idenn207</a>
+      <a class="btn ghost" href="/plan/">제작 계획 보기</a>
     </p>
-    <p>
-      <strong>Chrome 86+</strong> | <strong>Edge 86+</strong> | <strong>Opera 72+</strong>
-    </p>
-    <p>
-      For the best experience, please use a Chromium-based browser.
-      <br>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/API/File_System_API" target="_blank">
-        Learn more about File System Access API
-      </a>
-    </p>
-    <p style="margin-top: 24px; color: #858585;">
-      You can still use the <a href="index-editor.html">standalone editor</a> which works in all modern browsers.
-    </p>
-  </div>
-
-  <!-- IDE Root -->
-  <div id="ide-root"></div>
-
-  <!-- Phase 1: Namespace Initialization -->
-  <script>
-    window.CodeEditor = window.CodeEditor || {};
-    window.CodeEditor.Grammars = {};
-    window.CodeEditor.Features = {};
-    window.CodeEditor.CompletionData = {};
-    window.CodeEditor.IDE = {};
-  </script>
-
-  <!-- Phase 2: Data Files (No Dependencies) -->
-  <script src="src/tokenizer/grammars/javascript.js"></script>
-  <script src="src/tokenizer/grammars/html.js"></script>
-  <script src="src/tokenizer/grammars/css.js"></script>
-  <script src="src/features/autocomplete/data/html-completions.js"></script>
-  <script src="src/features/autocomplete/data/css-completions.js"></script>
-
-  <!-- Phase 3: Foundation Models -->
-  <script src="src/tokenizer/TokenizerState.js"></script>
-  <script src="src/model/Selection.js"></script>
-  <script src="src/model/SelectionCollection.js"></script>
-  <script src="src/model/Document.js"></script>
-
-  <!-- Phase 4: Tokenizer -->
-  <script src="src/tokenizer/Tokenizer.js"></script>
-
-  <!-- Phase 5: View Layer -->
-  <script src="src/view/EditorView.js"></script>
-
-  <!-- Phase 6: Input Handlers -->
-  <script src="src/input/EditContextHandler.js"></script>
-  <script src="src/input/TextareaHandler.js"></script>
-  <script src="src/input/InputHandler.js"></script>
-
-  <!-- Phase 7: Core Editor -->
-  <script src="src/core/Editor.js"></script>
-
-  <!-- Phase 8: Analysis Layer (for intelligent completions) -->
-  <script src="src/analysis/BuiltinTypes.js"></script>
-  <script src="src/analysis/SymbolTable.js"></script>
-  <script src="src/analysis/JSParser.js"></script>
-  <script src="src/analysis/ScopeAnalyzer.js"></script>
-  <script src="src/analysis/TypeInferenceEngine.js"></script>
-  <script src="src/analysis/ImportResolver.js"></script>
-
-  <!-- Phase 9: Feature Support Classes -->
-  <script src="src/features/autocomplete/IntelligentCompletionProvider.js"></script>
-  <script src="src/features/autocomplete/CompletionService.js"></script>
-  <script src="src/features/autocomplete/AutocompleteWidget.js"></script>
-  <script src="src/features/search/SearchService.js"></script>
-  <script src="src/features/search/SearchWidget.js"></script>
-  <script src="src/features/search/SearchDecorations.js"></script>
-
-  <!-- Phase 10: Features -->
-  <script src="src/features/autoClose/AutoCloseFeature.js"></script>
-  <script src="src/features/autoIndent/AutoIndentFeature.js"></script>
-  <script src="src/features/bracketMatch/BracketMatchFeature.js"></script>
-  <script src="src/features/indentGuide/IndentGuideFeature.js"></script>
-  <script src="src/features/multiCursor/MultiCursorFeature.js"></script>
-  <script src="src/features/autocomplete/AutocompleteFeature.js"></script>
-  <script src="src/features/search/SearchFeature.js"></script>
-  <script src="src/features/lineOperations/LineOperationsFeature.js"></script>
-
-  <!-- Phase 11: IDE Models -->
-  <script src="src/model/Tab.js"></script>
-  <script src="src/model/FileNode.js"></script>
-
-  <!-- Phase 12: IDE Services -->
-  <script src="src/services/FileService.js"></script>
-  <script src="src/services/WorkspaceService.js"></script>
-
-  <!-- Phase 13: IDE UI Components (no internal deps) -->
-  <script src="src/ide/ActivityBar.js"></script>
-  <script src="src/ide/Sidebar.js"></script>
-  <script src="src/ide/StatusBar.js"></script>
-
-  <!-- Phase 13: IDE UI Components (with deps) -->
-  <script src="src/ide/TabBar.js"></script>
-  <script src="src/ide/FileExplorer.js"></script>
-  <script src="src/ide/EditorArea.js"></script>
-
-  <!-- Phase 14: IDE Main Orchestrator -->
-  <script src="src/ide/IDE.js"></script>
-
-  <!-- Phase 15: IDE Entry Point -->
-  <script src="src/ide-app.js"></script>
+  </section>
+  <footer class="site-foot">
+    <span>&copy; 2026 박동민</span>
+    <a href="https://github.com/idenn207">GitHub</a>
+  </footer>
 </body>
-
 </html>

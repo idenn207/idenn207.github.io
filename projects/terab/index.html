@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TeraB 사례 | 박동민 포트폴리오</title>
+  <meta name="description" content="NAS에서 돌아가는 셀프호스팅 파일 관리 서비스 TeraB의 개요, 목표, 사용 기술, 주요 기능, 코드, 역할, 결과를 정리했습니다.">
+  <link rel="canonical" href="https://idenn207.github.io/projects/terab/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="박동민 포트폴리오">
+  <meta property="og:title" content="TeraB 사례 | 박동민 포트폴리오">
+  <meta property="og:description" content="NAS에서 돌아가는 셀프호스팅 파일 관리 서비스 TeraB의 개요, 목표, 사용 기술, 주요 기능, 코드, 역할, 결과를 정리했습니다.">
+  <meta property="og:url" content="https://idenn207.github.io/projects/terab/">
+  <meta property="og:image" content="https://idenn207.github.io/assets/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="박동민 포트폴리오 첫 화면. 셀프호스팅 서비스를 기획부터 구현까지 혼자 만든다는 제목과 recordWEB 화면, 서비스 3개의 이름이 있다.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/GothicA1-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+  <header class="site-head">
+    <a class="brand" href="/">박동민</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">메뉴</button>
+    <nav id="nav" aria-label="주 메뉴">
+      <a href="/#services" aria-current="true">서비스</a>
+      <a href="/#process">구축 과정</a>
+      <a href="/#about">소개</a>
+      <a href="/plan/">계획</a>
+      <a href="https://github.com/idenn207">GitHub</a>
+    </nav>
+  </header>
+  <div class="sheet">
+    <aside class="rail">
+      <nav class="toc" aria-label="이 페이지 목차">
+        <ol>
+          <li><a href="#overview">개요</a></li>
+          <li><a href="#goals">목표</a></li>
+          <li><a href="#stack">사용 기술</a></li>
+          <li><a href="#features">주요 기능</a></li>
+          <li><a href="#code">코드</a></li>
+          <li><a href="#role">역할</a></li>
+          <li><a href="#result">결과</a></li>
+        </ol>
+      </nav>
+    </aside>
+    <main id="main">
+      <header class="case-head">
+        <h1>TeraB</h1>
+        <p>NAS에서 돌아가는 셀프호스팅 파일 관리 서비스</p>
+        <dl class="form">
+          <div><dt>상태</dt><dd><strong>공개 저장소 보관됨</strong>, 후속은 비공개 개발</dd></div>
+          <div><dt>저장소</dt><dd><a href="https://github.com/idenn207/terab-archived">idenn207/terab-archived</a> (브랜치 v0.1)</dd></div>
+        </dl>
+      </header>
+
+      <section id="overview">
+        <h2>개요</h2>
+        <figure class="shot">
+          <img src="/assets/img/terab-drive.webp" width="1440" height="900" fetchpriority="high" alt="TeraB 드라이브 디자인 시안. 왼쪽에 메뉴와 저장 용량, 가운데에 빠른 액세스, 폴더, 파일 목록, 오른쪽에 선택한 파일의 세부 정보가 있다.">
+          <figcaption><strong>디자인 시안</strong>. 실제 화면이 아니며 파일과 사용자는 모두 가공입니다.</figcaption>
+        </figure>
+        <p>브라우저와 Android 앱의 요청을 Nginx가 받아 React 웹과 NestJS API로 나눕니다. 메타데이터는 PostgreSQL에, 파일은 S3 호환 MinIO에 두고, 뒤쪽 작업은 Redis와 BullMQ 워커가 맡습니다.</p>
+        <figure class="diagram">
+          <svg class="wide" viewBox="0 0 880 306" role="img" aria-label="TeraB 구성도. Browser와 Android App이 Nginx로 들어오고, Nginx는 Web과 API로 연결된다. API는 PostgreSQL, MinIO, Redis를 쓰고 MQ 워커는 Redis를 쓴다.">
+            <defs><marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L8 4L0 8z"/></marker></defs>
+            <text class="grp" x="20" y="24">클라이언트</text><text class="grp" x="235" y="24">서비스</text><text class="grp" x="710" y="24">저장소</text>
+            <g class="edge" marker-end="url(#a)">
+              <path d="M170 118H202V160H233"/><path d="M170 218H202V176H233"/>
+              <path d="M385 160H417V78H448"/><path d="M385 168H448"/>
+              <path d="M600 160H655V78H708"/><path d="M600 168H708"/><path d="M600 176H640V260H708"/><path d="M600 276H708"/>
+            </g>
+            <g class="node">
+              <rect x="20" y="90" width="150" height="56"/><text x="95" y="124">Browser</text>
+              <rect x="20" y="190" width="150" height="56"/><text x="95" y="224">Android App</text>
+              <rect x="235" y="140" width="150" height="56"/><text x="310" y="163">Nginx</text><text class="sub" x="310" y="183">리버스 프록시</text>
+              <rect x="450" y="50" width="150" height="56"/><text x="525" y="73">Web</text><text class="sub" x="525" y="93">React + Vite</text>
+              <rect x="450" y="140" width="150" height="56"/><text x="525" y="163">API</text><text class="sub" x="525" y="183">NestJS</text>
+              <rect x="450" y="240" width="150" height="56"/><text x="525" y="263">MQ</text><text class="sub" x="525" y="283">BullMQ Worker</text>
+              <rect x="710" y="50" width="150" height="56"/><text x="785" y="84">PostgreSQL</text>
+              <rect x="710" y="140" width="150" height="56"/><text x="785" y="163">MinIO</text><text class="sub" x="785" y="183">S3 호환</text>
+              <rect x="710" y="240" width="150" height="56"/><text x="785" y="263">Redis</text><text class="sub" x="785" y="283">BullMQ 브로커</text>
+            </g>
+          </svg>
+          <svg class="tall" viewBox="0 0 350 496" role="img" aria-label="TeraB 구성도. Browser와 Android App이 Nginx로 들어오고, Nginx는 Web과 API로 연결된다. API는 PostgreSQL, MinIO, Redis를 쓰고 MQ 워커는 Redis를 쓴다.">
+            <defs><marker id="b" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L8 4L0 8z"/></marker></defs>
+            <g class="edge" marker-end="url(#b)">
+              <path d="M85 66V88H150V108"/><path d="M255 66V88H190V108"/>
+              <path d="M140 166V188H85V208"/><path d="M200 166V188H255V208"/>
+              <path d="M225 266V294H85V318"/><path d="M255 266V318"/><path d="M330 238H342V456H332"/><path d="M160 456H178"/>
+            </g>
+            <g class="node">
+              <rect x="10" y="10" width="150" height="56"/><text x="85" y="44">Browser</text>
+              <rect x="180" y="10" width="150" height="56"/><text x="255" y="44">Android App</text>
+              <rect x="95" y="110" width="150" height="56"/><text x="170" y="133">Nginx</text><text class="sub" x="170" y="153">리버스 프록시</text>
+              <rect x="10" y="210" width="150" height="56"/><text x="85" y="233">Web</text><text class="sub" x="85" y="253">React + Vite</text>
+              <rect x="180" y="210" width="150" height="56"/><text x="255" y="233">API</text><text class="sub" x="255" y="253">NestJS</text>
+              <rect x="10" y="320" width="150" height="56"/><text x="85" y="354">PostgreSQL</text>
+              <rect x="180" y="320" width="150" height="56"/><text x="255" y="343">MinIO</text><text class="sub" x="255" y="363">S3 호환</text>
+              <rect x="10" y="428" width="150" height="56"/><text x="85" y="451">MQ</text><text class="sub" x="85" y="471">BullMQ Worker</text>
+              <rect x="180" y="428" width="150" height="56"/><text x="255" y="451">Redis</text><text class="sub" x="255" y="471">BullMQ 브로커</text>
+            </g>
+          </svg>
+          <figcaption><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/README.md">README 구성도</a>를 다시 그렸습니다.</figcaption>
+        </figure>
+      </section>
+
+      <section id="goals">
+        <h2>목표</h2>
+        <ul>
+          <li>외부 클라우드 없이 NAS에서 파일을 올리고, 공유하고, 지운다.</li>
+          <li>웹과 Android 앱이 같은 API를 쓴다.</li>
+          <li>배포를 <a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/docker-stack.yml">Docker Swarm 스택</a> 하나로 묶는다.</li>
+          <li>NAS 디스크를 Windows PC의 게임 설치 공간으로 쓸 수 있는지 확인한다.</li>
+        </ul>
+      </section>
+
+      <section id="stack">
+        <h2>사용 기술</h2>
+        <dl class="form">
+          <div><dt>서버</dt><dd>NestJS 11, Drizzle</dd></div>
+          <div><dt>저장</dt><dd>PostgreSQL 16, MinIO, Redis, BullMQ</dd></div>
+          <div><dt>화면</dt><dd>React 19, Vite 8, Tailwind 4, Headless UI</dd></div>
+          <div><dt>모바일</dt><dd>Capacitor Android</dd></div>
+          <div><dt>배포</dt><dd>Docker Swarm, storage-agent</dd></div>
+        </dl>
+      </section>
+
+      <section id="features">
+        <h2>주요 기능</h2>
+        <table class="ledger">
+          <thead><tr><th scope="col">모듈</th><th scope="col">기능</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">file, folder</th><td>파일 업로드와 내려받기, 폴더 관리</td></tr>
+            <tr><th scope="row">trash</th><td>휴지통</td></tr>
+            <tr><th scope="row">share</th><td>공유 권한 DB 스키마까지 작성, API와 화면은 미구현</td></tr>
+            <tr><th scope="row">twofa</th><td>TOTP, 푸시, 백업 코드 2단계 인증</td></tr>
+            <tr><th scope="row">invitation</th><td>초대 기반 가입</td></tr>
+            <tr><th scope="row">trusted-device</th><td>신뢰 기기 관리</td></tr>
+            <tr><th scope="row">mount-credential</th><td>웹에서 마운트 자격증명 발급·회수</td></tr>
+          </tbody>
+        </table>
+        <h3>화면 시안</h3>
+        <figure class="shot">
+          <img src="/assets/img/terab-explorer.webp" width="1440" height="900" loading="lazy" alt="TeraB NAS 대시보드 디자인 시안. 사용 중인 용량, 다운로드, 업로드, 진행 중인 작업 카드 아래에 볼륨 4개와 최근 파일 목록이 있다.">
+          <figcaption><strong>디자인 시안</strong>. 실제 화면이 아니며 볼륨, 파일, 수치는 모두 가공입니다.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="/assets/img/terab-wireframe.webp" width="1280" height="820" loading="lazy" alt="TeraB 드라이브 와이어프레임. 왼쪽 메뉴, 위쪽 검색창, 폴더와 파일 격자, 오른쪽 아래 업로드 진행 창이 손그림 느낌으로 그려져 있다.">
+          <figcaption><strong>디자인 시안</strong>. 드라이브 화면의 와이어프레임입니다.</figcaption>
+        </figure>
+        <h3>설계 기록</h3>
+        <table class="ledger">
+          <thead><tr><th scope="col">문서</th><th scope="col">결정</th><th scope="col">상태</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/docs/adr/0001-ts-rest-removal-swagger-migration.md">ADR 0001</a></th><td>ts-rest를 제거하고 Swagger, hey-api, TanStack Query로 전환</td><td>채택</td></tr>
+            <tr><th scope="row"><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/docs/adr/0002-twofa-strategy-pattern.md">ADR 0002</a></th><td>2단계 인증을 Strategy 패턴으로 구성</td><td>채택</td></tr>
+            <tr><th scope="row"><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/docs/adr/0003-storage-sot-nas-filesystem.md">ADR 0003</a></th><td>저장소 기준을 NAS 파일시스템으로 이전</td><td>제안</td></tr>
+            <tr><th scope="row"><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/docs/adr/0004-iscsi-priority-smb-deferred.md">ADR 0004</a></th><td>v1은 iSCSI 우선 통합</td><td>제안</td></tr>
+            <tr><th scope="row"><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/docs/adr/0005-sidecar-agent-systemd-only.md">ADR 0005</a></th><td>storage-agent를 systemd로만 배포</td><td>채택</td></tr>
+            <tr><th scope="row"><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/docs/adr/0006-admin-api-prefix-and-module.md">ADR 0006</a></th><td>관리자 API를 <code>/admin</code> 경로와 별도 모듈로 분리</td><td>채택</td></tr>
+            <tr><th scope="row"><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/docs/design/direction.md">디자인 방향 평가</a></th><td>4개 후보를 5개 기준 25점 만점으로 평가해 Editorial Minimal(23점) 채택</td><td>진행 중</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="code">
+        <h2>코드</h2>
+        <p>마운트 자격증명의 비밀값을 파일로 저장하는 코드입니다. 이름에 경로 구분자나 <code>..</code>가 있으면 쓰기 전에 거부해 저장 폴더 밖으로 나가지 못하게 하고, 파일은 0600, 폴더는 0700 권한으로 만듭니다.</p>
+        <figure class="code">
+          <figcaption><span>services/api/src/mount-credential/secret-store.ts</span><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/services/api/src/mount-credential/secret-store.ts#L51-L56">커밋 고정 링크</a></figcaption>
+          <pre tabindex="0"><code>  private resolvePath(name: string): string {
+    if (name.includes('/') || name.includes('\\') || name.includes('..')) {
+      throw new ApiException('MOUNT_CREDENTIAL_SECRET_WRITE_FAILED');
+    }
+    return path.join(this.opts.baseDir, name);
+  }</code></pre>
+        </figure>
+        <figure class="code">
+          <figcaption><span>services/api/src/mount-credential/secret-store.ts</span><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/services/api/src/mount-credential/secret-store.ts#L30-L40">커밋 고정 링크</a></figcaption>
+          <pre tabindex="0"><code>  async write(name: string, value: string): Promise&lt;string&gt; {
+    const filePath = this.resolvePath(name);
+    try {
+      await mkdir(this.opts.baseDir, { recursive: true, mode: SECRET_DIR_MODE });
+      await writeFile(filePath, value, { mode: SECRET_FILE_MODE });
+      return name;
+    } catch (err) {
+      this.logger.error({ err, name, baseDir: this.opts.baseDir }, 'secret-store write failed');
+      throw new ApiException('MOUNT_CREDENTIAL_SECRET_WRITE_FAILED');
+    }
+  }</code></pre>
+        </figure>
+      </section>
+
+      <section id="role">
+        <h2>역할</h2>
+        <p>1인 개발입니다. 기획 문서와 ADR 작성, API와 웹, Android 앱 구성, NAS 배포를 혼자 맡았습니다.</p>
+      </section>
+
+      <section id="result">
+        <h2>결과</h2>
+        <ul>
+          <li>Windows PC에서 NAS iSCSI LUN에 Steam 게임 1종을 설치·실행, 1GbE 디스크 읽기 피크 91.8MB/s(첫 실행과 5분 플레이, 1회 관찰)</li>
+          <li>웹에서 마운트 자격증명 발급·회수</li>
+          <li>공개 저장소는 v0.1에서 보관하고, 후속 개발은 비공개로 이어 갑니다.</li>
+        </ul>
+        <p><a href="https://github.com/idenn207/terab-archived/blob/31548ecbc13676afd0e98f1bb3fcad946689b55b/docs/spikes/phase0-steam-network-storage.md">측정 기록 보기</a></p>
+      </section>
+    </main>
+  </div>
+  <section class="contact" aria-labelledby="contact-title">
+    <h2 id="contact-title">다른 서비스</h2>
+    <p class="cta">
+      <a class="btn invert" href="/projects/recordweb/">recordWEB 사례 보기</a>
+      <a class="btn ghost" href="/projects/comax/">comax 사례 보기</a>
+    </p>
+  </section>
+  <footer class="site-foot">
+    <span>&copy; 2026 박동민</span>
+    <a href="https://github.com/idenn207">GitHub</a>
+  </footer>
+</body>
+</html>
