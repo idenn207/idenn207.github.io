@@ -1,6 +1,6 @@
 # 박동민 포트폴리오
 
-서울사이버대학교 'GitHub 포트폴리오' 과목의 개인 사이트입니다. 직접 만들고 운영한 서비스 3개(TeraB, recordWEB, comax)를 사례로 정리했습니다.
+서울사이버대학교 'GitHub 포트폴리오' 과목의 개인 사이트입니다. 직접 만든 서비스 3개(TeraB, recordWEB, comax)를 사례로 정리했습니다.
 
 - 사이트: <https://idenn207.github.io/>
 - 이전 Code Editor 페이지: 태그 `legacy-code-editor`
